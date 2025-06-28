@@ -19,7 +19,7 @@ const Signup = () => {
         console.log(formData);
     }
   return (
-    <div class="flex h-[700px] w-full">
+    <div class="flex h-[700px] w-full bg-white">
       <div class="w-full hidden md:inline-block">
         <img class="h-full" src="/bg.jpg" alt="leftSideImage" />
       </div>

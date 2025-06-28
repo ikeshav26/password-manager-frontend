@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Addpassword = () => {
+const SavedPassword = () => {
   return (
     <div className='bg-white text-black w-full min-h-screen pt-20'>
-      add password page
+      saved
     </div>
   )
 }
 
-export default Addpassword
+export default SavedPassword

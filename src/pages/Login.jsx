@@ -17,7 +17,7 @@ const Login = () => {
     }
 
     return (
-        <div className="flex flex-row-reverse h-[700px] w-full">
+        <div className="flex flex-row-reverse h-[700px] w-full bg-white">
             {/* Image on the Right */}
             <div className="w-full hidden md:inline-block">
                 <img className="h-full w-full object-cover" src="/bg.jpg" alt="rightSideImage" />

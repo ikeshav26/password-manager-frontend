@@ -1,8 +1,9 @@
 import React from 'react'
+import Navbar from '../components/Navbar'
 
 const Home = () => {
   return (
-    <div>
+    <div className='bg-white text-black w-full min-h-screen'>
       home page
     </div>
   )
