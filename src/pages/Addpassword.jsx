@@ -25,7 +25,7 @@ const Addpassword = () => {
     setemail("")
     setpassword("")
 
-    axios.post("http://localhost:3000/api/password/add-password", formdata, {
+    axios.post("https://password-manager-backend-r8k1.onrender.com/api/password/add-password", formdata, {
       withCredentials: true
     })
       .then((response) => {

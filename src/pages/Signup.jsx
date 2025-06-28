@@ -24,7 +24,7 @@ const Signup = () => {
     setusername("");
 
     axios
-      .post("http://localhost:3000/api/user/signup", formData, {
+      .post("https://password-manager-backend-r8k1.onrender.com/api/user/signup", formData, {
         withCredentials: true,
       })
       .then((response) => {

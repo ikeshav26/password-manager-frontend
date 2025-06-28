@@ -9,7 +9,7 @@ const SavedPassword = () => {
   useEffect(() => {
   const fetchPasswords = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/password/get-passwords", {
+      const res = await axios.get("https://password-manager-backend-r8k1.onrender.com/api/password/get-passwords", {
         withCredentials: true
       });
 
@@ -49,7 +49,7 @@ const SavedPassword = () => {
     setDeletingId(item._id); // start loading
 
     try {
-      const res = await axios.delete("http://localhost:3000/api/password/delete-password", {
+      const res = await axios.delete("https://password-manager-backend-r8k1.onrender.com/api/password/delete-password", {
         data: {
           title: item.title,
           username: item.username,

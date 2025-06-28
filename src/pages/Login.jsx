@@ -18,7 +18,7 @@ const Login = () => {
     setemail("")
     setpassword("")
 
-    axios.post("http://localhost:3000/api/user/login", formData, { withCredentials: true })
+    axios.post("https://password-manager-backend-r8k1.onrender.com/api/user/login", formData, { withCredentials: true })
       .then((response) => {
         setUser(true)
         toast.success("Login successful")
