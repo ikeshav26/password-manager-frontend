@@ -1,9 +1,85 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Addpassword = () => {
+  const [title, settitle] = useState("")
+  const [username, setusername] = useState("")
+  const [email, setemail] = useState("")
+  const [password, setpassword] = useState("")
+
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+    const formdata={
+      title,
+      username,
+      email,
+      password
+    }
+    console.log(formdata)
+    settitle("")
+    setusername("")
+    setemail("")
+    setpassword("")
+  }
   return (
-    <div className='bg-white text-black w-full min-h-screen pt-20'>
-      add password page
+    <div className='bg-white text-black w-full min-h-screen pt-24 px-6 md:px-20'>
+      <div className='max-w-2xl mx-auto bg-gray-50 shadow-md p-8 rounded-xl'>
+        <h2 className='text-2xl font-bold text-[#001834] mb-6'>Add New Password</h2>
+
+        <form onSubmit={handleSubmit} className='flex flex-col gap-5'>
+
+          <div>
+            <label className='block text-sm font-medium text-gray-700 mb-1'>Title</label>
+            <input
+            value={title}
+            onChange={(e)=>settitle(e.target.value)}
+              type='text'
+              placeholder='e.g. Google, Facebook...'
+              className='w-full px-4 py-2 border border-gray-300 rounded-lg outline-indigo-500'
+            />
+          </div>
+
+          <div>
+            <label className='block text-sm font-medium text-gray-700 mb-1'>Username</label>
+            <input
+            value={username}
+            onChange={(e)=>setusername(e.target.value)}
+              type='text'
+              placeholder='Enter your username'
+              className='w-full px-4 py-2 border border-gray-300 rounded-lg outline-indigo-500'
+            />
+          </div>
+
+          <div>
+            <label className='block text-sm font-medium text-gray-700 mb-1'>Email</label>
+            <input
+            value={email}
+            onChange={(e)=>setemail(e.target.value)}
+              type='email'
+              placeholder='you@example.com'
+              className='w-full px-4 py-2 border border-gray-300 rounded-lg outline-indigo-500'
+            />
+          </div>
+
+          <div>
+            <label className='block text-sm font-medium text-gray-700 mb-1'>Password</label>
+            <input
+            value={password}
+            onChange={(e)=>setpassword(e.target.value)}
+              type='password'
+              placeholder='Enter password'
+              className='w-full px-4 py-2 border border-gray-300 rounded-lg outline-indigo-500'
+            />
+          </div>
+
+          <button
+            type='submit'
+            className='mt-4 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition'
+          >
+            Save Password
+          </button>
+
+        </form>
+      </div>
     </div>
   )
 }
