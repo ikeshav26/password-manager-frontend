@@ -20,16 +20,16 @@ const Home = () => {
           </p>
           <div className="flex gap-4">
             <Link to="/add-password">
-              <button className="px-6 py-2 bg-red-600 hover:bg-red-400 hover:scale-102 text-white rounded-full transition">
+              <button className="px-6 cursor-pointer py-2 bg-red-600 hover:bg-red-400 hover:scale-102 text-white rounded-full transition">
                 Get Started
               </button>
             </Link>
             {!user ? <Link to="/login">
-              <button className="px-6 py-2 border border-[#001834] text-[#001834] hover:scale-102 hover:bg-indigo-50 rounded-full transition">
+              <button className="px-6 py-2 cursor-pointer border border-[#001834] text-[#001834] hover:scale-102 hover:bg-indigo-50 rounded-full transition">
                 Login
               </button>
             </Link>:<Link to="/">
-              <button className="px-6 py-2 border hover:scale-102 border-red-600 text-red-600 hover:bg-red-50 rounded-full transition">
+              <button className="px-6 cursor-pointer py-2 border hover:scale-102 border-red-600 text-red-600 hover:bg-red-50 rounded-full transition">
                 Logout
               </button>
             </Link>}

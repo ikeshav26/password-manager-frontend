@@ -4,94 +4,70 @@ import toast from 'react-hot-toast';
 
 const SavedPassword = () => {
   const [mockPasswords, setmockPasswords] = useState([]);
-  const [deletePass, setdeletePass] = useState(null);
+  const [deletingId, setDeletingId] = useState(null); 
 
-  
   useEffect(() => {
-    const fetchPasswords = async () => {
-      try {
-        const res = await axios.get("http://localhost:3000/api/password/get-passwords", {
-          withCredentials: true
-        });
-        setmockPasswords(res.data.passwords);
-        toast.success("Passwords fetched successfully!");
-      } catch (err) {
-        console.error("Error fetching passwords:", err);
-        toast.error("Failed to fetch passwords. Please try again.");
-      }
-    };
-    fetchPasswords();
-  }, []);
-
-  
-  const copyHandler = (e) => {
-    const password = e.target.previousElementSibling.value;
-    navigator.clipboard.writeText(password)
-      .then(() => toast.success("Password copied to clipboard!"));
-  };
-
-
-  const deleteHandler = async () => {
+  const fetchPasswords = async () => {
     try {
-      const res = await axios.delete("http://localhost:3000/api/password/delete-password", {
-        data: {
-          title: deletePass.title,
-          username: deletePass.username,
-          email: deletePass.email,
-          id: deletePass.id
-        },
+      const res = await axios.get("http://localhost:3000/api/password/get-passwords", {
         withCredentials: true
       });
 
       
-      setmockPasswords(prev => prev.filter(p => p._id !== deletePass.id));
-      toast.success(`Deleted: ${deletePass.title}`);
-      setdeletePass(null);
-    } catch (error) {
-      console.error("Error deleting password:", error);
-      toast.error("Failed to delete password.");
+      if (res.data.passwords && res.data.passwords.length > 0) {
+        setmockPasswords(res.data.passwords);
+        toast.success("Passwords fetched successfully!");
+      } else {
+        setmockPasswords([]);
+        toast("No passwords saved yet.");
+      }
+    } catch (err) {
+      if (err.response && err.response.status === 404) {
+
+        setmockPasswords([]);
+        toast("No passwords saved yet.");
+      } else {
+        console.error("Error fetching passwords:", err);
+        toast.error("Failed to fetch passwords. Please try again.");
+      }
     }
   };
 
-  
-  const triggerDelete = (item) => {
-    setdeletePass({
-      title: item.title,
-      username: item.username,
-      email: item.email,
-      id: item._id
-    });
+  fetchPasswords();
+}, []);
 
-    toast((t) => (
-      <span>
-        Delete <strong>{item.title}</strong>?
-        <button
-          onClick={() => {
-            deleteHandler();
-            toast.dismiss(t.id);
-          }}
-          className="ml-2 bg-red-600 text-white px-3 py-1 rounded text-sm"
-        >
-          Confirm
-        </button>
-        <button
-          onClick={() => {
-            setdeletePass(null);
-            toast.dismiss(t.id);
-          }}
-          className="ml-2 bg-gray-200 text-black px-3 py-1 rounded text-sm"
-        >
-          Cancel
-        </button>
-      </span>
-    ), {
-      duration: 5000,
-      style: {
-        border: '1px solid #ccc',
-        padding: '12px',
-        borderRadius: '10px'
-      }
-    });
+
+  const copyHandler = (e) => {
+    const password = e.target.previousElementSibling.value;
+    navigator.clipboard.writeText(password)
+      .then(() => {
+        toast.success("Password copied to clipboard!");
+      });
+  };
+
+  const deleteHandler = async (item) => {
+    setDeletingId(item._id); // start loading
+
+    try {
+      const res = await axios.delete("http://localhost:3000/api/password/delete-password", {
+        data: {
+          title: item.title,
+          username: item.username,
+          email: item.email,
+          id: item._id
+        },
+        withCredentials: true
+      });
+
+      // Update UI to remove deleted password
+      setmockPasswords(prev => prev.filter(p => p._id !== item._id));
+      toast.success("Password deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting password:", error);
+      toast.error("Failed to delete password. Please try again.");
+    } finally {
+      setDeletingId(null); // stop loading
+    }
   };
 
   return (
@@ -135,10 +111,15 @@ const SavedPassword = () => {
               </div>
 
               <button
-                onClick={() => triggerDelete(item)}
-                className='mt-2 text-sm text-red-500 hover:underline self-end'
+                onClick={() => deleteHandler(item)}
+                disabled={deletingId === item._id}
+                className={`mt-2 text-sm self-end ${
+                  deletingId === item._id
+                    ? 'text-gray-400 cursor-not-allowed'
+                    : 'text-red-500 hover:underline'
+                }`}
               >
-                Delete
+                {deletingId === item._id ? 'Deleting...' : 'Delete'}
               </button>
             </div>
           ))}
