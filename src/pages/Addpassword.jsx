@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import axios from 'axios'
+import toast from 'react-hot-toast'
+
 
 const Addpassword = () => {
   const [title, settitle] = useState("")
@@ -14,12 +17,22 @@ const Addpassword = () => {
       email,
       password
     }
+    
     console.log(formdata)
     settitle("")
     setusername("")
     setemail("")
     setpassword("")
+
+    const res=axios.post("http://localhost:3000/api/password/add-password", formdata,{withCredentials:true})
+        res.then((response)=>{
+          toast.success("Password saved successfully")
+        }).catch((error)=>{
+            console.error("Error during saving password:", error);
+            alert("An error occurred saving password. Please try again.");
+        })
   }
+
   return (
     <div className='bg-white text-black w-full min-h-screen pt-24 px-6 md:px-20'>
       <div className='max-w-2xl mx-auto bg-gray-50 shadow-md p-8 rounded-xl'>

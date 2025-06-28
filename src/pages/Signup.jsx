@@ -20,7 +20,6 @@ const Signup = () => {
         setemail("")
         setpassword("")
         setusername("")
-        console.log(formData);
 
         const res=axios.post("http://localhost:3000/api/user/signup", formData,{withCredentials:true})
         res.then((response)=>{

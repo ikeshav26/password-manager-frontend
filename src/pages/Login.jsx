@@ -18,7 +18,7 @@ const Login = () => {
         }
         setemail("")
         setpassword("")
-        console.log(formData);
+
         
 
         const res=axios.post("http://localhost:3000/api/user/login", formData,{withCredentials:true})
