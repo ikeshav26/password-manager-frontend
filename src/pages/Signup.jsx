@@ -29,7 +29,7 @@ const Signup = () => {
           navigate('/')
         }).catch((error)=>{
             console.error("Error during signup:", error);
-            alert("An error occurred during signup. Please try again.");
+            toast("An error occurred during signup. Please try again.");
         })
 
     }

@@ -4,7 +4,7 @@ import passwordContext, { AppContext } from '../context/AppContext'
 
 const Home = () => {
   const {user}=useContext(passwordContext)
-  console.log(user)
+
   return (
     <div className="bg-white text-black w-full min-h-screen py-30 px-6 md:px-20">
       

@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
+import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { useContext } from 'react'
+import passwordContext from '../context/AppContext'
 
 const Login = () => {
     const [email, setemail] = useState("")
     const [password, setpassword] = useState("")
+    const {user,setUser,navigate}=useContext(passwordContext)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -14,10 +19,21 @@ const Login = () => {
         setemail("")
         setpassword("")
         console.log(formData);
+        
+
+        const res=axios.post("http://localhost:3000/api/user/login", formData,{withCredentials:true})
+        res.then((response)=>{
+          setUser(true)
+          toast.success("Login successfull")
+          navigate('/')
+        }).catch((error)=>{
+            console.error("Error during login:", error);
+            toast.error("An error occurred during login. Please try again.");
+        })
     }
 
     return (
-        <div className="flex flex-row-reverse h-[700px] w-full bg-white">
+        <div className="flex flex-row-reverse min-h-screen w-full bg-white">
             {/* Image on the Right */}
             <div className="w-full hidden md:inline-block">
                 <img className="h-full w-full object-cover" src="/bg.jpg" alt="rightSideImage" />
