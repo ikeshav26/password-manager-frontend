@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
+import passwordContext from "../context/AppContext";
 
 const Signup = () => {
     const [username, setusername] = useState("")
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
+    const {user,setUser,navigate}=useContext(passwordContext)
 
     const handleSubmit=(e)=>{
         e.preventDefault()
@@ -17,9 +21,20 @@ const Signup = () => {
         setpassword("")
         setusername("")
         console.log(formData);
+
+        const res=axios.post("http://localhost:3000/api/user/signup", formData,{withCredentials:true})
+        res.then((response)=>{
+          setUser(true)
+          toast.success("Signup successfull")
+          navigate('/')
+        }).catch((error)=>{
+            console.error("Error during signup:", error);
+            alert("An error occurred during signup. Please try again.");
+        })
+
     }
   return (
-    <div class="flex h-[700px] w-full bg-white">
+    <div class="flex min-h-screen w-full bg-white">
       <div class="w-full hidden md:inline-block">
         <img class="h-full" src="/bg.jpg" alt="leftSideImage" />
       </div>

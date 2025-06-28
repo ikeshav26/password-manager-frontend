@@ -7,6 +7,7 @@ import Login from './pages/Login'
 import SavedPassword from '../src/pages/SavedPassword'
 import Navbar from './components/Navbar'
 import { useLocation } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/login' element={<Login/>}/>
       </Routes>
+      <Toaster/>
     </div>
   )
 }

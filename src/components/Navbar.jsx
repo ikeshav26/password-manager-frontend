@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import passwordContext from "../context/AppContext";
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
-
+    const {user,setUser}=useContext(passwordContext)
     return (
         <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white  transition-all fixed top-0 left-0 w-full z-50">
 
@@ -29,11 +30,15 @@ const Navbar = () => {
                     </svg>
                 </div>
 
-                <Link to="/login">
-                    <button className="cursor-pointer px-6 py-2 bg-[#001834] hover:bg-indigo-950 hover:scale-105 transition text-white rounded-full">
+                {!user ?<Link to='/login' onClick={() => setOpen(false)}>
+                    <button className="cursor-pointer px-6 py-2 bg-[#001834] hover:bg-indigo-950 hover:scale-105 transition text-white rounded-full text-sm">
                         Login
                     </button>
-                </Link>
+                </Link>:<Link to='/' onClick={() => setUser(false)}>
+                    <button className="cursor-pointer px-6 py-2 bg-red-600 hover:bg-red-400 hover:scale-105 transition text-white rounded-full text-sm">
+                        Logout
+                    </button>
+                </Link>}
             </div>
 
             {/* Mobile Menu Toggle */}
@@ -50,11 +55,15 @@ const Navbar = () => {
                 <Link to='/' onClick={() => setOpen(false)}>Home</Link>
                 <Link to='/add-password' onClick={() => setOpen(false)}>Add Password</Link>
                 <Link to='/saved-password' onClick={() => setOpen(false)}>Saved Passwords</Link>
-                <Link to='/login' onClick={() => setOpen(false)}>
+                {!user ?<Link to='/login' onClick={() => setOpen(false)}>
                     <button className="cursor-pointer px-6 py-2 bg-[#001834] hover:bg-indigo-950 hover:scale-105 transition text-white rounded-full text-sm">
                         Login
                     </button>
-                </Link>
+                </Link>:<Link to='/' onClick={() => setUser(false)}>
+                    <button className="cursor-pointer px-6 py-2 bg-red-600 hover:bg-red-400 hover:scale-105 transition text-white rounded-full text-sm">
+                        Logout
+                    </button>
+                </Link>}
             </div>
 
         </nav>

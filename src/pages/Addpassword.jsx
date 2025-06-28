@@ -73,7 +73,7 @@ const Addpassword = () => {
 
           <button
             type='submit'
-            className='mt-4 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition'
+            className='mt-4 w-full bg-[#001834] hover:bg-indigo-950 hover:scale-102 text-white font-medium py-2 px-4 rounded-lg transition'
           >
             Save Password
           </button>
