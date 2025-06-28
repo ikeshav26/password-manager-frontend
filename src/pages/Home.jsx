@@ -19,16 +19,20 @@ const Home = () => {
             Pass Vault is a secure and easy-to-use password manager that helps you store, organize, and protect all your passwords in one place. Say goodbye to forgotten credentials and unsafe sticky notes!
           </p>
           <div className="flex gap-4">
-            <Link to="/signup">
-              <button className="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full transition">
+            <Link to="/add-password">
+              <button className="px-6 py-2 bg-red-600 hover:bg-red-400 hover:scale-102 text-white rounded-full transition">
                 Get Started
               </button>
             </Link>
-            <Link to="/login">
-              <button className="px-6 py-2 border border-indigo-600 text-indigo-600 hover:bg-indigo-50 rounded-full transition">
+            {!user ? <Link to="/login">
+              <button className="px-6 py-2 border border-[#001834] text-[#001834] hover:scale-102 hover:bg-indigo-50 rounded-full transition">
                 Login
               </button>
-            </Link>
+            </Link>:<Link to="/">
+              <button className="px-6 py-2 border hover:scale-102 border-red-600 text-red-600 hover:bg-red-50 rounded-full transition">
+                Logout
+              </button>
+            </Link>}
           </div>
         </div>
 
@@ -62,7 +66,7 @@ const Home = () => {
             <img src="/secure_vault.png" alt="Easy Access" className="h-24 mx-auto mb-4" />
             <h3 className="text-xl font-bold text-center mb-2">Easy to Use</h3>
             <p className="text-gray-600 text-center">
-              Simple interface to add, view, search, and manage passwords without technical knowledge.
+              Simple interface to add, view, and manage passwords without technical knowledge.
             </p>
           </div>
 

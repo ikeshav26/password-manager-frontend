@@ -1,6 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Montagu+Slab:opsz,wght@16..144,100..700&family=Orbitron:wght@400..900&family=Outfit:wght@100..900&family=Poppins:wght@500&family=Rubik+Dirt&display=swap');
 @import "tailwindcss";
 @plugin "daisyui";
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Montagu+Slab:opsz,wght@16..144,100..700&family=Orbitron:wght@400..900&family=Outfit:wght@100..900&family=Poppins:wght@500&family=Rubik+Dirt&display=swap');
+
 
 
 .fontNew {

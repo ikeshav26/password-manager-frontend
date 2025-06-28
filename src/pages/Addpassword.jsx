@@ -18,7 +18,6 @@ const Addpassword = () => {
       password
     }
     
-    console.log(formdata)
     settitle("")
     setusername("")
     setemail("")

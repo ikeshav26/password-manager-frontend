@@ -13,14 +13,15 @@ const SavedPassword = () => {
         withCredentials: true
       });
       setmockPasswords(res.data.passwords);
-      
+      toast.success("Passwords fetched successfully!");
     } catch (err) {
       console.error("Error fetching passwords:", err);
+      toast.error("Failed to fetch passwords. Please try again.");
     }
   };
 
   fetchPasswords(); 
-})
+},[])
 
 const copyHandler = (e) => {
   const password = e.target.previousElementSibling.value;
@@ -29,6 +30,8 @@ const copyHandler = (e) => {
       toast.success("Password copied to clipboard!");
     })
   }
+
+
   return (
     <div className='bg-white text-black w-full min-h-screen pt-24 px-4 md:px-20'>
       <h2 className='text-2xl font-bold text-[#001834] mb-6'>Your Saved Passwords</h2>
@@ -67,7 +70,7 @@ const copyHandler = (e) => {
                 </div>
               </div>
 
-              <button className='mt-2 text-sm text-red-500 hover:underline self-end'>
+              <button  className='mt-2 text-sm text-red-500 hover:underline self-end'>
                 Delete
               </button>
             </div>
